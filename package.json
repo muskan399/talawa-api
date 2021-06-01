@@ -8,7 +8,8 @@
     "start": "cross-env pm2-runtime start index.js --watch",
     "prod": "cross-env NODE_ENV=production pm2-runtime start index.js",
     "test-server": "cross-env NODE_ENV=test TEST_DB=talawa-test-db nodemon index.js --ext js,graphql",
-    "lint": "eslint . --fix && echo 'Lint complete.'"
+    "lint": "eslint '**/*.{js}'",
+    "format": "prettier --write \"**/*.{js}\""
   },
   "repository": {
     "type": "git",
@@ -70,7 +71,4 @@
     "netmask": ">=2.0.1",
     "prettier": "^2.2.1"
   },
-  "scripts": {
-    "format": "prettier --write"
-  }
 }

@@ -1,4 +1,4 @@
-# Talawa API
+# Talawa API.
 
 [![N|Solid](image/talawa-logo-lite-200x200.png)](https://github.com/PalisadoesFoundation/talawa-api)
 

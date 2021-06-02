@@ -12,8 +12,6 @@
 name: "CodeQL"
 
 on:
-  push:
-    branches: [patch4,patch1]
   pull_request:
     branches: [patch4,patch1]
 

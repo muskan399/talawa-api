@@ -46,7 +46,7 @@ jobs:
       - run: chmod +x ./.github/workflows/countline.py
       - run: ./.github/workflows/countline.py
   
-  Analyze Code:
+  Analyze-Code:
     runs-on: ubuntu-latest
     steps:
       - name: Initialize CodeQL

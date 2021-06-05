@@ -24,6 +24,8 @@ jobs:
 
     - name: Prettify code
       uses: creyD/prettier_action@v3.3
+      with:
+        same_commit: True
       
         # This part is also where you can pass other options, for example:
         

@@ -3,8 +3,8 @@ const { imageHash } = require('image-hash');
 module.exports = async (imageJustUploadedPath, itemImage) => {
   // This function checks whether a user is trying to re=upload the same profile picture or an org is trying to re-upload the same org image
   if (itemImage) {
-                                                                           let oldImageHash;
-                        let newImageHash;
+    let oldImageHash;
+    let newImageHash;
     await new Promise((resolve) => {
       imageHash(itemImage, 16, true, (error, data) => {
         if (error) oldImageHash = '';

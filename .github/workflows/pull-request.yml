@@ -25,8 +25,7 @@ jobs:
     - name: Prettify code
       uses: creyD/prettier_action@v3.3
       with:
-        dry: True
-        prettier_options: -w
+        same_commit: True
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

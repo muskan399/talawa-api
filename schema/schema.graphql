@@ -7,8 +7,10 @@ const organization = require("./organization/organization.graphql");
 const event = require("./event/event.graphql");
 const newsfeed = require("./newsfeed/newsfeed.graphql");
 const chats = require("./chats/chat.graphql");
+const utils = require("./utils.graphql");
 
 const typeDefs = gql`
+  directive @auth on FIELD_DEFINITION
 
   type Message {
     _id: ID!
@@ -18,8 +20,6 @@ const typeDefs = gql`
     videoUrl:String
     creator: User
   }
-
-    scalar Upload
 
   input GroupInput {
     title: String
@@ -44,6 +44,7 @@ const typeDefs = gql`
   ${event}
   ${newsfeed}
   ${chats}
+  ${utils}
 
   type Subscription {
     messageSentToDirectChat: DirectChatMessage

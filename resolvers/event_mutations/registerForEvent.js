@@ -1,20 +1,26 @@
 const User = require('../../models/User');
 const Event = require('../../models/Event');
-const authCheck = require('../functions/authCheck');
+const { NotFoundError } = require('errors');
+const requestContext = require('talawa-request-context');
 
 const registerForEvent = async (parent, args, context) => {
-  // authentication check
-  authCheck(context);
-
   // gets user in token - to be used later on
   const userFound = await User.findOne({ _id: context.userId });
   if (!userFound) {
-    throw new Error('User does not exist');
+    throw new NotFoundError(
+      requestContext.translate('user.notFound'),
+      'user.notFound',
+      'user'
+    );
   }
 
   const eventFound = await Event.findOne({ _id: args.id });
   if (!eventFound) {
-    throw new Error('Event does not exist');
+    throw new NotFoundError(
+      requestContext.translate('event.notFound'),
+      'event.notFound',
+      'event'
+    );
   }
 
   // add event to the user record

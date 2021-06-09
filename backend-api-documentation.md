@@ -1,5 +1,6 @@
 ## Type Structures(Schemas)
-These type structures and inputs have been used in the queries, mutations and subscriptions listed below. 
+
+These type structures and inputs have been used in the queries, mutations and subscriptions listed below.
 
 # Chats
 
@@ -61,8 +62,8 @@ These type structures and inputs have been used in the queries, mutations and su
         recurring: Boolean!
         recurrance: String
         attendees: String!
-        isPublic: Boolean! 
-        isRegisterable: Boolean! 
+        isPublic: Boolean!
+        isRegisterable: Boolean!
         creator: User!
         # registrants: [User]
         admins(adminId: ID): [User]
@@ -88,8 +89,8 @@ These type structures and inputs have been used in the queries, mutations and su
         recurring: Boolean!
         recurrance: String
         attendees: String
-        isPublic: Boolean! 
-        isRegisterable: Boolean! 
+        isPublic: Boolean!
+        isRegisterable: Boolean!
         organizationId: ID!
         startDate: String!
         endDate: String
@@ -135,10 +136,10 @@ These type structures and inputs have been used in the queries, mutations and su
         title_DESC
         description_ASC
         description_DESC
-        startDate_ASC 
-        startDate_DESC 
-        endDate_ASC 
-        endDate_DESC 
+        startDate_ASC
+        startDate_DESC
+        endDate_ASC
+        endDate_DESC
         allDay_ASC
         allDay_DESC
         startTime_ASC
@@ -158,13 +159,14 @@ These type structures and inputs have been used in the queries, mutations and su
         title_DESC
         description_ASC
         description_DESC
-        createdAt_ASC 
+        createdAt_ASC
         createdAt_DESC
         deadline_ASC
         deadline_DESC
     }
 
 # Newsfeed
+
     type Post {
         _id: ID
         text: String!
@@ -177,9 +179,9 @@ These type structures and inputs have been used in the queries, mutations and su
         likedBy: [User]
         comments: [Comment]
         likeCount: Int
-        commentCount: Int 
+        commentCount: Int
     }
-      
+
     input PostInput {
         _id: ID
         text: String!
@@ -197,8 +199,8 @@ These type structures and inputs have been used in the queries, mutations and su
         post: Post!
         likedBy: [User]
         likeCount: Int
-    } 
-  
+    }
+
     input CommentInput {
         text: String!
     }
@@ -229,7 +231,7 @@ These type structures and inputs have been used in the queries, mutations and su
         _id: ID!
         name:String!
         description: String!
-        isPublic: Boolean! 
+        isPublic: Boolean!
         creator: User!
         members: [User]
         admins(adminId: ID): [User]
@@ -243,11 +245,11 @@ These type structures and inputs have been used in the queries, mutations and su
         name:String!
         description: String!
         attendees: String
-        isPublic: Boolean! 
-        visibleInSearch: Boolean! 
+        isPublic: Boolean!
+        visibleInSearch: Boolean!
         apiUrl:String
     }
- 
+
     input UpdateOrganizationInput {
         name:String
         description: String
@@ -316,11 +318,12 @@ These type structures and inputs have been used in the queries, mutations and su
     }
 
 # Users
+
     input LoginInput {
-        email:String!, 
+        email:String!,
         password:String!
     }
-  
+
     type AuthData {
         user: User!,
         accessToken: String!
@@ -400,6 +403,7 @@ These type structures and inputs have been used in the queries, mutations and su
     }
 
 # Other schemas
+
     type Message {
         _id: ID!
         text: String
@@ -425,35 +429,38 @@ These type structures and inputs have been used in the queries, mutations and su
     }
 
 ## Queries
+
 GraphQL queries can traverse related objects and their fields, letting clients fetch lots of related data in one request, instead of making several roundtrips as one would need in a classic REST architecture.
 
-  type Query {
-    users(id: ID, orderBy: UserOrderByInput): [User]
-    usersConnection(where: UserWhereInput, first: Int, skip: Int, orderBy: UserOrderByInput): [User]!
-    organizations(id: ID, orderBy: OrganizationOrderByInput): [Organization]
-    organizationsConnection(where: OrganizationWhereInput, first: Int, skip: Int, orderBy: OrganizationOrderByInput): [Organization]!
-    events(id: ID, orderBy: EventOrderByInput): [Event]
-    eventsByOrganization(id: ID, orderBy: EventOrderByInput): [Event]
-    registeredEventsByUser(id: ID, orderBy: EventOrderByInput): [Event]
-    event(id: ID): Event
-    registrantsByEvent(id: ID): [User]
-    me:User!
-    posts(orderBy: PostOrderByInput): [Post]
-    postsByOrganization(id: ID!, orderBy: PostOrderByInput): [Post]
-    tasksByEvent(id: ID!, orderBy: TaskOrderByInput): [Task]
-    tasksByUser(id: ID!, orderBy: TaskOrderByInput): [Task]
-    comments: [Comment]
-    commentsByPost(id: ID!): [Comment]
-    post(id: ID): Post
-    groups: [Group]
-    directChats: [DirectChat]
-    directChatMessages: [DirectChatMessage]
+type Query {
+users(id: ID, orderBy: UserOrderByInput): [User]
+usersConnection(where: UserWhereInput, first: Int, skip: Int, orderBy: UserOrderByInput): [User]!
+organizations(id: ID, orderBy: OrganizationOrderByInput): [Organization]
+organizationsConnection(where: OrganizationWhereInput, first: Int, skip: Int, orderBy: OrganizationOrderByInput): [Organization]!
+events(id: ID, orderBy: EventOrderByInput): [Event]
+eventsByOrganization(id: ID, orderBy: EventOrderByInput): [Event]
+registeredEventsByUser(id: ID, orderBy: EventOrderByInput): [Event]
+event(id: ID): Event
+registrantsByEvent(id: ID): [User]
+me:User!
+posts(orderBy: PostOrderByInput): [Post]
+postsByOrganization(id: ID!, orderBy: PostOrderByInput): [Post]
+tasksByEvent(id: ID!, orderBy: TaskOrderByInput): [Task]
+tasksByUser(id: ID!, orderBy: TaskOrderByInput): [Task]
+comments: [Comment]
+commentsByPost(id: ID!): [Comment]
+post(id: ID): Post
+groups: [Group]
+directChats: [DirectChat]
+directChatMessages: [DirectChatMessage]
 
     groupChats: [GroupChat]
     groupChatMessages: [GroupChatMessage]
-  }
+
+}
 
 # 1
+
 users(
 id: ID
 orderBy: UserOrderByInput
@@ -462,6 +469,7 @@ orderBy: UserOrderByInput
 Description: It fetches the list of users.
 
 Arguments:
+
 1. id: ID - This lets you identify an object(user) uniquely.
 2. orderBy: UserOrderByInput - Filters the data in an ordered manner according to the input provided.
 
@@ -469,16 +477,17 @@ Returns: User
 
 Example-
 query{
-    users(
-        id:<id>
-        orderBy:id_ASC
-    ){
-        firstName
-        lastName
-    }
+users(
+id:<id>
+orderBy:id_ASC
+){
+firstName
+lastName
+}
 }
 
 # 2
+
 usersConnection(
 where: UserWhereInput
 first: Int
@@ -489,7 +498,8 @@ orderBy: UserOrderByInput
 Description: It fetches the list of user connections.
 
 Arguments:
-1. where: UserWhereInput - It filters the data by checking for some specific attributes.  
+
+1. where: UserWhereInput - It filters the data by checking for some specific attributes.
 2. first: 4 - It fetches the first 4 records.
 3. skip: 2 - It skips the first 2 records.
 4. orderBy: UserOrderByInput - Filters the data in an ordered manner according to the input provided.
@@ -498,20 +508,21 @@ Returns: User!
 
 The ! signifies that the object returned is non-nullable or NOT NULL.
 
-Example- 
+Example-
 query{
-    usersConnection(
-        where:{firstName_contains:"a"}
-        first: 2
-        skip: 0
-        orderBy: id_ASC
-    ){
-        firstName
-        lastName
-    }
+usersConnection(
+where:{firstName_contains:"a"}
+first: 2
+skip: 0
+orderBy: id_ASC
+){
+firstName
+lastName
+}
 }
 
 # 3
+
 organizations(
 id: ID
 orderBy: OrganizationOrderByInput
@@ -528,14 +539,15 @@ Returns: Organization
 
 Example-
 query{
-    organizations( 
-      orderBy: id_ASC
-    ){
-    name
-  }
+organizations(
+orderBy: id_ASC
+){
+name
+}
 }
 
 # 4
+
 organizationsConnection(
 where: OrganizationWhereInput
 first: Int
@@ -546,9 +558,10 @@ orderBy: OrganizationOrderByInput
 Description: It fetches the list of the organization's connections.
 
 Arguments:
+
 1. where: OrganizationWhereInput - It filters the data by checking for some specific attributes.
 2. first: 3 - It fetches the first 3 records.
-3. skip: 0 -  It skips the first 0 records.
+3. skip: 0 - It skips the first 0 records.
 4. orderBy: OrganizationOrderByInput - Filters the data in an ordered manner according to the input provided.
 
 Returns: Organization
@@ -557,17 +570,18 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 query{
-    organizationsConnection(
-      where: {description_not:"abc"}
-      first: 1
-      skip: 1
-      orderBy: id_ASC
-    ){
-    name
-  }
+organizationsConnection(
+where: {description_not:"abc"}
+first: 1
+skip: 1
+orderBy: id_ASC
+){
+name
+}
 }
 
 # 5
+
 events(
 id: ID
 orderBy: EventOrderByInput
@@ -576,6 +590,7 @@ orderBy: EventOrderByInput
 Description: It fetches the list of events.
 
 Arguments:
+
 1. id: ID - This lets you identify an object(event) uniquely.
 2. orderBy: EventOrderByInput - Filters the data in an ordered manner according to the input provided.
 
@@ -583,14 +598,15 @@ Returns: Event
 
 Example-
 query{
-  events(
-    orderBy: id_ASC
-  ){
-    title
-  }
+events(
+orderBy: id_ASC
+){
+title
+}
 }
 
 # 6
+
 eventsByOrganization(
 id: ID
 orderBy: EventOrderByInput
@@ -599,22 +615,24 @@ orderBy: EventOrderByInput
 Description: It fetches the list of events by organizations.
 
 Arguments:
+
 1. id: ID - This lets you identify an object(event) uniquely.
 2. orderBy: EventOrderByInput - Filters the data in an ordered manner according to the input provided.
 
 Returns: Event
 
-Example- 
+Example-
 query{
-  eventsByOrganization(
-    orderBy: id_ASC
-  ){
-    title
-    description
-  }
+eventsByOrganization(
+orderBy: id_ASC
+){
+title
+description
+}
 }
 
 # 7
+
 registeredEventsByUser(
 id: ID
 orderBy: EventOrderByInput
@@ -623,6 +641,7 @@ orderBy: EventOrderByInput
 Description: It fetches the list of events registered by user.
 
 Arguments:
+
 1. id: ID - This lets you identify an object(event) uniquely.
 2. orderBy: EventOrderByInput - Filters the data in an ordered manner according to the input provided.
 
@@ -630,16 +649,17 @@ Returns: Event
 
 Example-
 query{
-  registeredEventsByUser(
-    orderBy: title_ASC
-  )
-  {
-    title
-    description
-  }
+registeredEventsByUser(
+orderBy: title_ASC
+)
+{
+title
+description
+}
 }
 
 # 8
+
 event(
 id: ID
 ): Event
@@ -647,20 +667,22 @@ id: ID
 Description: It fetches a single event.
 
 Argumments:
+
 1. id: ID - This lets you identify an object(event) uniquely.
 
 Returns: Event
 
 Example-
 query{
-  event(
-      id:<id>
-  ){
-    title
-  }
+event(
+id:<id>
+){
+title
+}
 }
 
 # 9
+
 registrantsByEvent(
 id: ID
 ): [User]
@@ -668,20 +690,22 @@ id: ID
 Description: It fetches the registrants by event.
 
 Arguments:
+
 1. id: ID - This lets you identify an object(event/registrant) uniquely.
 
 Returns: Event
 
 Example-
 query{
-  registrantsByEvent(
-      id: <id>
-  ){
-    firstName
-  }
+registrantsByEvent(
+id: <id>
+){
+firstName
+}
 }
 
 # 10
+
 me: User!
 
 Description: It gives us the current user.
@@ -695,13 +719,14 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 query{
-  me{
-    firstName
-    lastName
-  }
+me{
+firstName
+lastName
+}
 }
 
 # 11
+
 posts(
 orderBy: PostOrderByInput
 ): [Post]
@@ -709,21 +734,23 @@ orderBy: PostOrderByInput
 Description: It fetches the list of posts
 
 Arguments:
+
 1. orderBy: PostOrderByInput - Filters the data in an ordered manner according to the input provided.
 
 Returns: Post
 
 Example-
 query{
-  posts(
-    orderBy:id_ASC
-  ){
-    title
-    imageUrl
-  }
+posts(
+orderBy:id_ASC
+){
+title
+imageUrl
+}
 }
 
 # 12
+
 postsByOrganization(
 id: ID!
 orderBy: PostOrderByInput
@@ -732,6 +759,7 @@ orderBy: PostOrderByInput
 Description: It fetches the list of posts by organizations.
 
 Arguments:
+
 1. id: ID! - This lets you identify an object(post) uniquely. The ! signifies that the object passed is non-nullable or NOT NULL.
 2. orderBy: PostOrderByInput - Filters the data in an ordered manner according to the input provided.
 
@@ -739,15 +767,16 @@ Returns: Post
 
 Example-
 query{
-  postsByOrganization(
-    id: <id>
-    orderBy: id_ASC
-  ){
-    createdAt
-  }
+postsByOrganization(
+id: <id>
+orderBy: id_ASC
+){
+createdAt
+}
 }
 
 # 13
+
 tasksByEvent(
 id: ID!
 orderBy: TaskOrderByInput
@@ -756,6 +785,7 @@ orderBy: TaskOrderByInput
 Description: It fetches the list of taks by events.
 
 Arguments:
+
 1. id: ID! - This lets you identify an object(task/event) uniquely. The ! signifies that the object passed is non-nullable or NOT NULL.
 2. orderBy: PostOrderByInput - Filters the data in an ordered manner according to the input provided.
 
@@ -763,15 +793,16 @@ Returns: Task
 
 Example-
 query{
-  tasksByEvent(
-    id: <id>
-    orderBy: id_ASC
-  ){
-    title
-  }
+tasksByEvent(
+id: <id>
+orderBy: id_ASC
+){
+title
+}
 }
 
 # 14
+
 tasksByUser(
 id: ID!
 orderBy: TaskOrderByInput
@@ -780,6 +811,7 @@ orderBy: TaskOrderByInput
 Description: It fetches the list of taks by users.
 
 Arguments:
+
 1. id: ID! - This lets you identify an object(task/user) uniquely. The ! signifies that the object passed is non-nullable or NOT NULL.
 2. orderBy: PostOrderByInput - Filters the data in an ordered manner according to the input provided.
 
@@ -787,35 +819,37 @@ Returns: Task
 
 Example-
 query{
-  tasksByUser(
-    id: <id>
-    orderBy: id_ASC
-  ){
-    event
-  }
+tasksByUser(
+id: <id>
+orderBy: id_ASC
+){
+event
+}
 }
 
 # 15
+
 comments: [Comment]
 
 Description: It fetches the comments.
 
-Arguments: 
+Arguments:
 none
 
 Returns: Comment
 
 Example-
 query{
-  comments{
-    text
-    creator{
-      firstName
-    }
-  }
+comments{
+text
+creator{
+firstName
+}
+}
 }
 
 # 16
+
 commentsByPost(
 id: ID!
 ): [Comment]
@@ -823,23 +857,25 @@ id: ID!
 Description: It fetches the comments by posts.
 
 Arguments:
+
 1. id: ID! - This lets you identify an object(comment/post) uniquely. The ! signifies that the object passed is non-nullable or NOT NULL.
 
 Returns: Comment
 
 Example-
 query{
-  commentsByPost(
-      id: <id>
-  ){
-      text
-      creator{
-          firstName
-      }
-  }
+commentsByPost(
+id: <id>
+){
+text
+creator{
+firstName
+}
+}
 }
 
 # 17
+
 post(
 id: ID
 ): Post
@@ -847,21 +883,23 @@ id: ID
 Description: it fetches a single post.
 
 Arguments:
+
 1. id: ID - his lets you identify an object(post) uniquely.
 
 Returns: Post
 
 Example-
 query{
-    post(
-        id: <id>
-    ){
-        text
-        title
-    }
+post(
+id: <id>
+){
+text
+title
+}
 }
 
 # 18
+
 groups: [Group]
 
 Description: It fetches the list of groups.
@@ -873,13 +911,14 @@ Returns: Group
 
 Example-
 query{
-  groups{
-    title
-    description
-  }
+groups{
+title
+description
+}
 }
 
 # 19
+
 directChats: [DirectChat]
 
 Description: It fetches the list of direct chats.
@@ -891,17 +930,18 @@ Returns: DirectChat
 
 Example-
 query{
-  directChats{
-    users{
-      firstName
-    }
-    messages{
-      messageContent
-    }
-  }
+directChats{
+users{
+firstName
+}
+messages{
+messageContent
+}
+}
 }
 
 # 20
+
 directChatMessages: [DirectChatMessage]
 
 Description: It fetches the list of direct chat messages.
@@ -913,18 +953,19 @@ Returns: DirectChatMessage
 
 Example-
 query{
-  directChatMessages{
-    sender{
-      firstName
-    }
-    receiver{
-      firstName
-    }
-    createdAt
-  }
+directChatMessages{
+sender{
+firstName
+}
+receiver{
+firstName
+}
+createdAt
+}
 }
 
 # 21
+
 groupChats: [GroupChat]
 
 Description: It fetches the list of group chats.
@@ -936,20 +977,21 @@ Returns: GroupChat
 
 Example-
 query{
-  groupChats{
-    users{
-      firstName
-    }
-    messages{
-      createdAt
-    }
-    creator{
-      email
-    }
-  }
+groupChats{
+users{
+firstName
+}
+messages{
+createdAt
+}
+creator{
+email
+}
+}
 }
 
 # 22
+
 groupChatMessages: [GroupChatMessage]
 
 Description: It fetches the list of group chat messages.
@@ -961,24 +1003,26 @@ Returns: GroupChatMessages
 
 Example-
 query{
-  groupChatMessages{
-    sender{
-      firstName
-    }
-    createdAt
-    messageContent
-  }
+groupChatMessages{
+sender{
+firstName
+}
+createdAt
+messageContent
+}
 }
 
 ## Subscriptions
+
 Like queries, subscriptions enable you to fetch data. Unlike queries, subscriptions are long-lasting operations that can change their result over time. They can maintain an active connection to your GraphQL server (most commonly via WebSocket), enabling the server to push updates to the subscription's result.
 
-  type Subscription {
-    messageSentToDirectChat: DirectChatMessage
-    messageSentToGroupChat: GroupChatMessage
-  }
+type Subscription {
+messageSentToDirectChat: DirectChatMessage
+messageSentToGroupChat: GroupChatMessage
+}
 
 # 1
+
 messageSentToDirectChat: DirectChatMessage
 
 Description: It fetches the list of messages sent to direct chat.
@@ -990,18 +1034,19 @@ Returns: DirectChatMessage
 
 Example-
 subscription{
-  messageSentToDirectChat{
-    sender{
-      firstName
-    }
-    receiver{
-      firstName
-    }
-    createdAt
-  }
+messageSentToDirectChat{
+sender{
+firstName
+}
+receiver{
+firstName
+}
+createdAt
+}
 }
 
 # 2
+
 messageSentToGroupChat: GroupChatMessage
 
 Description: It fetches the list of messages sent to group chat.
@@ -1013,27 +1058,28 @@ Returns: GroupChatMessage
 
 Example-
 subscription{
-  messageSentToGroupChat{
-    groupChatMessageBelongsTo{
-      creator{
-        firstName
-      }
-    }
-    sender{
-      firstName
-    }
-    messageContent
-  }
+messageSentToGroupChat{
+groupChatMessageBelongsTo{
+creator{
+firstName
+}
+}
+sender{
+firstName
+}
+messageContent
+}
 }
 
 ## Mutations
+
 Mutation queries modify data in the data store and returns a value. It can be used to insert, update, or delete data. Mutations are defined as a part of the schema.
 
-  type Mutation {
-    signUp(data: UserInput!, file:Upload): AuthData!
-    login(data: LoginInput!): AuthData!
-    refreshToken(refreshToken: String!) : ExtendSession!
-    revokeRefreshTokenForUser(userId: String!) : Boolean!
+type Mutation {
+signUp(data: UserInput!, file:Upload): AuthData!
+login(data: LoginInput!): AuthData!
+refreshToken(refreshToken: String!) : ExtendSession!
+revokeRefreshTokenForUser(userId: String!) : Boolean!
 
     createEvent(data: EventInput): Event!
     removeEvent(id: ID!): Event!
@@ -1043,7 +1089,7 @@ Mutation queries modify data in the data store and returns a value. It can be us
     updateOrganization(id:ID!, data: UpdateOrganizationInput) : Organization!
 
     removeOrganization(id: ID!) : User!
-    
+
     createAdmin (data: UserAndOrganizationInput!) : User!
     removeAdmin (data: UserAndOrganizationInput!) : User!
     joinPublicOrganization (organizationId: ID!) : User!
@@ -1093,10 +1139,11 @@ Mutation queries modify data in the data store and returns a value. It can be us
     sendMessageToGroupChat(chatId: ID!, messageContent: String!): GroupChatMessage!
     addUserToGroupChat(userId: ID!, chatId: ID!): GroupChat!
     removeUserFromGroupChat(userId: ID!, chatId: ID!): GroupChat!
-    
-  }
+
+}
 
 # 1
+
 signUp(
 data: UserInput!
 file: Upload
@@ -1105,6 +1152,7 @@ file: Upload
 Description: It creates a new user with authentication data and tokens.
 
 Arguments:
+
 1. data: UserInput! - It contains all the data that is needed to create the user object. The ! signifies that the object passed is non-nullable or NOT NULL.
 2. file: Upload - It contains a file that is needed to create a user.
 
@@ -1114,19 +1162,20 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  signUp(data:{
-    firstName:"abc"
-    lastName: "def"
-    email: "wef@xyz.com"
-    password:"sdvsv"
-  }){
-    user{
-      firstName
-    }
-  }
+signUp(data:{
+firstName:"abc"
+lastName: "def"
+email: "wef@xyz.com"
+password:"sdvsv"
+}){
+user{
+firstName
+}
+}
 }
 
 # 2
+
 login(
 data: LoginInput!
 ): AuthData!
@@ -1134,7 +1183,8 @@ data: LoginInput!
 Description: It updates the Auth Data whenever the user logs in.
 
 Arguments:
-1. data: LoginInput! -  It contains all the data that is needed to update the data. The ! signifies that the object passed is non-nullable or NOT NULL.
+
+1. data: LoginInput! - It contains all the data that is needed to update the data. The ! signifies that the object passed is non-nullable or NOT NULL.
 
 Returns: AuthData!
 
@@ -1142,17 +1192,18 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  login(data:{
-    email: "wef@xyz.com"
-    password:"sdvsv"
-  }){
-    user{
-      firstName
-    }
-  }
+login(data:{
+email: "wef@xyz.com"
+password:"sdvsv"
+}){
+user{
+firstName
+}
+}
 }
 
 # 3
+
 refreshToken(
 refreshToken: String!
 ): ExtendSession!
@@ -1160,6 +1211,7 @@ refreshToken: String!
 Description: It generates a new token for the user.
 
 Arguments:
+
 1. refreshToken: String! - It contains the Refresh Token. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: ExtendSession!
@@ -1168,14 +1220,15 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  refreshToken(refreshToken:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlblZlcnNpb24iOjAsInVzZXJJ9mD__c77yU"
-  ){
-    accessToken
-    refreshToken
-  }
+refreshToken(refreshToken:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlblZlcnNpb24iOjAsInVzZXJJ9mD\_\_c77yU"
+){
+accessToken
+refreshToken
+}
 }
 
 # 4
+
 revokeRefreshTokenForUser(
 userId: String!
 ): Boolean!
@@ -1183,6 +1236,7 @@ userId: String!
 Description: It revokes the refresh token for the user inputted.
 
 Arguments:
+
 1. userId: String! - It contains userId which identifies the user.
 
 Returns: Boolean!
@@ -1192,10 +1246,11 @@ The ! signifies that the value returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  revokeRefreshTokenForUser(userId:"6059ede189334c0242145e46")
+revokeRefreshTokenForUser(userId:"6059ede189334c0242145e46")
 }
 
 # 5
+
 createEvent(
 data: EventInput
 ): Event!
@@ -1203,6 +1258,7 @@ data: EventInput
 Description: It creates an event based on the data inputted.
 
 Arguments:
+
 1. data: EventInput - It contains the data needed to create an event.
 
 Returns: Event!
@@ -1211,24 +1267,25 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  createEvent(
-    data:{
-      title:"abc"
-      description:"xyz"
-      recurring: false
-      isPublic: true
-      isRegisterable: true
-      organizationId:"dclkn123"
-      startDate: "2021-03-29"
-      allDay: true
-    }
-  ){
-    title
-    description
-  }
+createEvent(
+data:{
+title:"abc"
+description:"xyz"
+recurring: false
+isPublic: true
+isRegisterable: true
+organizationId:"dclkn123"
+startDate: "2021-03-29"
+allDay: true
+}
+){
+title
+description
+}
 }
 
 # 6
+
 removeEvent(
 id: ID!
 ): Event!
@@ -1236,6 +1293,7 @@ id: ID!
 Description: It removes the event based on the ID inputted.
 
 Arguments:
+
 1. id: ID! - It helps to identify a unique event which needs to be removed. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Event!
@@ -1244,13 +1302,14 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  removeEvent(id:<id>){
-    title
-    description
-  }
+removeEvent(id:<id>){
+title
+description
+}
 }
 
 # 7
+
 registerForEvent(
 id: ID!
 ): Event!
@@ -1258,6 +1317,7 @@ id: ID!
 Description: It registers a user for an event.
 
 Arguments:
+
 1. id: ID! - It helps to identify a unique user which needs to be registered. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Event!
@@ -1266,13 +1326,14 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  registerForEvent(id:<id>){
-    title
-    description
-  }
+registerForEvent(id:<id>){
+title
+description
+}
 }
 
 # 8
+
 updateEvent(
 id: ID!
 data: UpdateEventInput
@@ -1281,6 +1342,7 @@ data: UpdateEventInput
 Description: It updates the event information with the data inputted.
 
 Arguments:
+
 1. id: ID! - It helps to identify a unique event which needs to be updated. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. data: UpdateEventInput - It contains the data that needs to be updated.
 
@@ -1290,17 +1352,18 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  updateEvent(
-    id:<id>
-    data: {
-      title:"Xyz"
-    }
-  ){
-    title
-  }
+updateEvent(
+id:<id>
+data: {
+title:"Xyz"
+}
+){
+title
+}
 }
 
 # 9
+
 createOrganization(
 data: OrganizationInput
 file: Upload
@@ -1309,6 +1372,7 @@ file: Upload
 Description: It creates a new organization based on the input provided.
 
 Arguments:
+
 1. data: OrganizationInput - It contains the data that need to be inputted.
 2. file: Upload - It is the file that need to be uploaded.
 
@@ -1318,21 +1382,22 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  createOrganization(
-    data:{
-      name:"pj1"
-      description: "abcd"
-      isPublic: true
-      visibleInSearch:true
-    }
-  ){
-    _id
-    name
-    description
-  }
+createOrganization(
+data:{
+name:"pj1"
+description: "abcd"
+isPublic: true
+visibleInSearch:true
+}
+){
+\_id
+name
+description
+}
 }
 
 # 10
+
 updateOrganization(
 id: ID!
 data: UpdateOrganizationInput
@@ -1341,6 +1406,7 @@ data: UpdateOrganizationInput
 Description: It updates the organization information.
 
 Arguments:
+
 1. id: ID! - It helps to identify a unique organization which needs to be updated. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. data: pdateOrganizationInput - It contains the data that need to be updated.
 
@@ -1350,20 +1416,21 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  updateOrganization(
-    id: <id>
-    data:{
-      name: "xyz"
-      description: "abc"
-    }
-  ){
-    _id
-    name
-    description
-  }
+updateOrganization(
+id: <id>
+data:{
+name: "xyz"
+description: "abc"
+}
+){
+\_id
+name
+description
+}
 }
 
 # 11
+
 removeOrganization(
 id: ID!
 ): User!
@@ -1371,6 +1438,7 @@ id: ID!
 Description: It removes an organization based on the id inputted.
 
 Arguments:
+
 1. id: ID! - It helps to identify a unique organization which needs to be deleted . The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: User!
@@ -1379,14 +1447,15 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  removeOrganization(id:<id>){
-    organizationsBlockedBy{
-      name
-    }
-  }
+removeOrganization(id:<id>){
+organizationsBlockedBy{
+name
+}
+}
 }
 
 # 12
+
 createAdmin(
 data: UserAndOrganizationInput!
 ): User!
@@ -1394,6 +1463,7 @@ data: UserAndOrganizationInput!
 Description: It creates an admin for an organization based on the data provided.
 
 Arguments:
+
 1. data: UserAndOrganizationInput! - It contains the user data who needs to be made the admin and the org data. The ! signifies that the object passed is non-nullable or NOT NULL.
 
 Returns: User!
@@ -1402,17 +1472,18 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  createAdmin(
-    data:{
-      organizationId: <o_id>
-      userId: <u_id>
-    }
-  ){
-    adminFor
-  }
+createAdmin(
+data:{
+organizationId: <o_id>
+userId: <u_id>
+}
+){
+adminFor
+}
 }
 
 # 13
+
 removeAdmin(
 data: UserAndOrganizationInput!
 ): User!
@@ -1420,6 +1491,7 @@ data: UserAndOrganizationInput!
 Description: It removes the user from admin.
 
 Arguments:
+
 1. data: UserAndOrganizationInput! - It contains the user data who needs to be removed as the admin and the org data. The ! signifies that the object passed is non-nullable or NOT NULL.
 
 Returns: User!
@@ -1428,16 +1500,17 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  removeAdmin(
-    data:{
-      organizationId: <o_id>
-      userId: <u_id>
-    }){
-      firstName
-    }
+removeAdmin(
+data:{
+organizationId: <o_id>
+userId: <u_id>
+}){
+firstName
+}
 }
 
 # 14
+
 joinPublicOrganization(
 organizationId: ID!
 ): User!
@@ -1445,6 +1518,7 @@ organizationId: ID!
 Description: It adds organization to user.
 
 Arguments:
+
 1. organizationId: ID! - It helps to identify a unique organization which needs to be joined. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: User!
@@ -1453,12 +1527,13 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  joinPublicOrganization(organizationId:<o_id>){
-    _id
-  }
+joinPublicOrganization(organizationId:<o_id>){
+\_id
+}
 }
 
 # 15
+
 leaveOrganization(
 organizationId: ID!
 ): User!
@@ -1466,6 +1541,7 @@ organizationId: ID!
 Description: It removes an organization inputted from a user.
 
 Arguments:
+
 1. organizationId: ID! - It helps to identify a unique organization which needs to be removed from a user. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: User!
@@ -1474,12 +1550,13 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  leaveOrganization(organizationId:<o_id>){
-    joinedOrganizations
-  }
+leaveOrganization(organizationId:<o_id>){
+joinedOrganizations
+}
 }
 
 # 16
+
 removeMember(
 data: MultipleUsersAndOrganizationInput!
 ): Organization!
@@ -1487,6 +1564,7 @@ data: MultipleUsersAndOrganizationInput!
 Description: It removes multiple users from an organization.
 
 Arguments:
+
 1. data: MultipleUsersAndOrganizationInput! - It contains data for multiple users that need to be removed and the org data from which they are removed. The ! signifies that the data passed is non-nullable or NOT NULL.
 
 Returns: Organization!
@@ -1495,17 +1573,18 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  removeMember(
-    data:{
-     organizationId:"<o_id>"
-      userIds: [<id_1>,<id_2>]
-    }
-  ){
-    name
-  }
+removeMember(
+data:{
+organizationId:"<o_id>"
+userIds: [<id_1>,<id_2>]
+}
+){
+name
+}
 }
 
 # 17
+
 adminRemovePost(
 organizationId: ID!
 postId: ID!
@@ -1514,8 +1593,9 @@ postId: ID!
 Description: It lets the admin delete the post.
 
 Arguments:
+
 1. organizationId: ID! - It helps to identify a unique organization in which post needs to be removed by the admin. The ! signifies that the value passed is non-nullable or NOT NULL.
-2. postId: ID! - It helps to identify a unique  post which needs to be removed by the admin. The ! signifies that the value passed is non-nullable or NOT NULL.
+2. postId: ID! - It helps to identify a unique post which needs to be removed by the admin. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Post!
 
@@ -1523,15 +1603,16 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  adminRemovePost(
-    organizationId: <o_id>
-    postId: <p_id>
-  ){
-    text
-  }
+adminRemovePost(
+organizationId: <o_id>
+postId: <p_id>
+){
+text
+}
 }
 
 # 18
+
 adminRemoveEvent(
 eventId: ID!
 ): Event!
@@ -1539,6 +1620,7 @@ eventId: ID!
 Description: It lets the admin remove an event.
 
 Arguments:
+
 1. eventId: ID! - It helps to identify a unique event which needs to be removed by the admin. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Event!
@@ -1547,14 +1629,15 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  adminRemoveEvent(
-    eventId: <e_id>
-  ){
-    title
-  }
+adminRemoveEvent(
+eventId: <e_id>
+){
+title
+}
 }
 
 # 19
+
 adminRemoveGroup(
 groupId: ID!
 ): Message!
@@ -1562,6 +1645,7 @@ groupId: ID!
 Description: It lets the admin remove a group.
 
 Arguments:
+
 1. groupId: ID! - It helps to identify a unique group which needs to be removed by the admin. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Message!
@@ -1570,14 +1654,15 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  adminRemoveGroup(
-    groupId: <g_id>
-  ){
-    text
-  }
+adminRemoveGroup(
+groupId: <g_id>
+){
+text
+}
 }
 
 # 20
+
 createPost(
 data: PostInput!
 file: Upload
@@ -1585,7 +1670,8 @@ file: Upload
 
 Description: It creates a new post.
 
-Arguments: 
+Arguments:
+
 1. data: PostInput! - It contains data for the post that needs to be created. The ! signifies that the data passed is non-nullable or NOT NULL.
 2. file: Upload - It is the file that need to be uploaded.
 
@@ -1593,17 +1679,18 @@ Returns: Post
 
 Example-
 mutation{
-  createPost(
-    data:{
-      text:"adas"
-      organizationId: <o_id>
-    }
-  ){
-    text
-  }
+createPost(
+data:{
+text:"adas"
+organizationId: <o_id>
+}
+){
+text
+}
 }
 
 # 21
+
 removePost(
 id: ID!
 ): Post
@@ -1611,65 +1698,71 @@ id: ID!
 Description: It removes the post based on the ID provided.
 
 Arguments:
+
 1. id: ID! - It helps to identify a unique post which needs to be removed. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Post
 
 Example-
 mutation{
-  removePost(
-    id: <p_id>
-  ){
-    _id
-    text
-  }
+removePost(
+id: <p_id>
+){
+\_id
+text
+}
 }
 
 # 22
+
 likePost(
 id: ID!
 ): Post
 
 Description: It sets the post liked by the user.
 
-Arguments: 
+Arguments:
+
 1. id: ID! - It helps to identify a unique post which needs to be liked. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Post
 
 Example-
 mutation{
-  removePost(
-    id: <p_id>
-  ){
-    _id
-    likeCount
-  }
+removePost(
+id: <p_id>
+){
+\_id
+likeCount
+}
 }
 
 # 23
+
 unlikePost(
 id: ID!
 ): Post
 
 Description: It unlikes the post.
 
-Arguments: 
+Arguments:
+
 1. id: ID! - It helps to identify a unique post which needs to be unliked. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Post
 
 Example-
 mutation{
-  removePost(
-    id: <p_id>
-  ){
-    _id
-    likeCount
-  }
+removePost(
+id: <p_id>
+){
+\_id
+likeCount
+}
 }
 
 # 24
+
 createComment(
 postId: ID!
 data: CommentInput!
@@ -1678,6 +1771,7 @@ data: CommentInput!
 Description: It creates a comment in a post.
 
 Arguments:
+
 1. postId: ID! - It helps to identify a unique post in which a comment needs to be created. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. data: CommentInput! - It contains data for the comment that needs to be created. The ! signifies that the data passed is non-nullable or NOT NULL.
 
@@ -1685,18 +1779,19 @@ Returns: Comment
 
 Example-
 mutation{
-  createComment(
-    postId: <p_id>
-    data: {
-      text:"sdg"
-    }
-  ){
-    _id
-    text
-  }
+createComment(
+postId: <p_id>
+data: {
+text:"sdg"
+}
+){
+\_id
+text
+}
 }
 
 # 25
+
 removeComment(
 id: ID!
 ): Comment
@@ -1704,68 +1799,74 @@ id: ID!
 Description: It removes the comment based on the ID provided.
 
 Arguments:
+
 1. id: ID! - It helps to identify a unique comment which needs to be removed. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Comment
 
 Example-
 mutation{
-  removeComment(
-    id: <c_id>
-  ){
-    _id
-    text
-    post{
-      _id
-    }
-  }
+removeComment(
+id: <c_id>
+){
+\_id
+text
+post{
+\_id
+}
+}
 }
 
 # 26
+
 likeComment(
 id: ID!
 ): Comment
 
 Description: It sets the comment liked by the user.
 
-Arguments: 
+Arguments:
+
 1. id: ID! - It helps to identify a unique comment which needs to be liked. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Comment
 
 Example-
 mutation{
-  likeComment(
-    id: <c_id>
-  ){
-    _id
-    text
-  }
+likeComment(
+id: <c_id>
+){
+\_id
+text
+}
 }
 
 # 27
+
 unlikeComment(
 id: ID!
 ): Comment
 
 Description: It unlikes the Comment.
 
-Arguments: 
+Arguments:
+
 1. id: ID! - It helps to identify a unique comment which needs to be unliked. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Comment
 
 Example-
 mutation{
-  unlikeComment(
-    id: <c_id>
-  ){
-    _id
-    text
-  }
+unlikeComment(
+id: <c_id>
+){
+\_id
+text
+}
 }
 
 # 28
+
 createTask(
 data: TaskInput
 eventId: ID!
@@ -1773,7 +1874,8 @@ eventId: ID!
 
 Description: It creates a new task.
 
-Arguments: 
+Arguments:
+
 1. data: taskInput - It contains data for task that needs to be created.
 2. eventId: ID! - It helps to identify a unique event where task needs to be added. The ! signifies that the value passed is non-nullable or NOT NULL.
 
@@ -1783,18 +1885,19 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  createTask(
-    data:{
-      title:"afsdg"
-    }
-    eventId: <e_id>
-  ){
-    _id
-    title
-  }
+createTask(
+data:{
+title:"afsdg"
+}
+eventId: <e_id>
+){
+\_id
+title
+}
 }
 
 # 29
+
 updateTask(
 id: ID!
 data: UpdateTaskInput
@@ -1803,26 +1906,28 @@ data: UpdateTaskInput
 Description: It updates tasks.
 
 Arguments:
+
 1. id: ID! - It helps to identify a unique task which needs to be updated. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. data: UpdateTaskInput - It contains the data that needs to be updated.
 
-Returns: Task 
+Returns: Task
 
 Example-
 mutation{
-  updateTask(
-    id: <t_id>
-    data:{
-      title:"Sdsdf"
-    }
-  ){
-    _id
-    title
-    description
-  }
+updateTask(
+id: <t_id>
+data:{
+title:"Sdsdf"
+}
+){
+\_id
+title
+description
+}
 }
 
 # 30
+
 removeTask(
 id: ID!
 ): Task
@@ -1830,21 +1935,23 @@ id: ID!
 Description: It removes the task.
 
 Arguments:
+
 1. id: ID! - It helps to identify a unique task which needs to be removed. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Task
 
 Example-
 mutation{
-  removeTask(
-    id: <t_id>
-  ){
-    _id
-    title
-  }
+removeTask(
+id: <t_id>
+){
+\_id
+title
+}
 }
 
 # 31
+
 createGroup(
 data: GroupInput!
 ): Group!
@@ -1852,6 +1959,7 @@ data: GroupInput!
 Description: It creates a new group.
 
 Arguments:
+
 1. data: GroupInput! - It contains data for the group that needs to be created. The ! signifies that the data passed is non-nullable or NOT NULL.
 
 Returns: Group!
@@ -1860,21 +1968,22 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  createGroup(
-    data: {
-      organizationId: <o_id>
-    }
-  ){
-    _id
-    organization{
-      members{
-        firstName
-      }
-    }
-  }
+createGroup(
+data: {
+organizationId: <o_id>
+}
+){
+\_id
+organization{
+members{
+firstName
+}
+}
+}
 }
 
 # 32
+
 sendMembershipRequest(
 organizationId: ID!
 ): MembershipRequest!
@@ -1882,6 +1991,7 @@ organizationId: ID!
 Description: It sends a membership request to the current user.
 
 Arguments:
+
 1. organizationId: ID! - It helps to identify a unique organization whose membership request needs to be sent. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: MembershipRequest!
@@ -1890,17 +2000,18 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  sendMembershipRequest(
-    organizationId: <o_id>
-  ){
-    _id
-    user{
-      firstName
-    }
-  }
+sendMembershipRequest(
+organizationId: <o_id>
+){
+\_id
+user{
+firstName
+}
+}
 }
 
 # 33
+
 acceptMembershipRequest(
 membershipRequestId: ID!
 ): MembershipRequest!
@@ -1908,6 +2019,7 @@ membershipRequestId: ID!
 Description: It accepts the membership request and add the user as a member to the organization.
 
 Arguments:
+
 1. membershipRequestId: ID! - It helps to identify a unique membership request that needs to be accepted. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: MembershipRequest!
@@ -1916,20 +2028,21 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  acceptMembershipRequest(
-    membershipRequestId:  <m_id>
-  ){
-    _id
-    user{
-      firstName
-    }
-    organization{
-      name
-    }
-  }
+acceptMembershipRequest(
+membershipRequestId: <m_id>
+){
+\_id
+user{
+firstName
+}
+organization{
+name
+}
+}
 }
 
 # 34
+
 rejectMembershipRequest(
 membershipRequestId: ID!
 ): MembershipRequest!
@@ -1937,26 +2050,28 @@ membershipRequestId: ID!
 Description: It rejects the membership request for the user.
 
 Argument:
+
 1. membershipRequestId: ID! - It helps to identify a unique membership request that needs to be rejected. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: MembershipRequest!
 
 Eample-
 mutation{
-  rejectMembershipRequest(
-    membershipRequestId: <m_id>
-  ){
-    _id
-    user{
-      firstName
-    }
-    organization{
-      name
-    }
-  }
+rejectMembershipRequest(
+membershipRequestId: <m_id>
+){
+\_id
+user{
+firstName
+}
+organization{
+name
+}
+}
 }
 
 # 35
+
 cancelMembershipRequest(
 membershipRequestId: ID!
 ): MembershipRequest!
@@ -1964,26 +2079,28 @@ membershipRequestId: ID!
 Description: It cancels the membership of the user.
 
 Arguments:
+
 1. membershipRequestId: ID! - It helps to identify a unique membership request that needs to be cancelled. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: MembershipRequest!
 
 Example-
 mutation{
-  cancelMembershipRequest(
-    membershipRequestId: <m_id>
-  ){
-    _id
-    user{
-      firstName
-    }
-    organization{
-      name
-    }
-  }
+cancelMembershipRequest(
+membershipRequestId: <m_id>
+){
+\_id
+user{
+firstName
+}
+organization{
+name
+}
+}
 }
 
 # 36
+
 blockUser(
 organizationId: ID!
 userId: ID!
@@ -1992,6 +2109,7 @@ userId: ID!
 Description: It blocks the user.
 
 Arguments:
+
 1. organizationId: ID! - It helps to identify a unique organization that needs to block user. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. userId: ID! - It helps to identify a unique user that needs to blocked. The ! signifies that the value passed is non-nullable or NOT NULL.
 
@@ -2001,17 +2119,18 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  blockUser(
-    organizationId: <o_id>
-    userId: <u_id>
-  ){
-    organizationsBlockedBy{
-      name
-    }
-  }
+blockUser(
+organizationId: <o_id>
+userId: <u_id>
+){
+organizationsBlockedBy{
+name
+}
+}
 }
 
 # 37
+
 unblockUser(
 organizationId: ID!
 userId: ID!
@@ -2020,6 +2139,7 @@ userId: ID!
 Description: It unblocks the user.
 
 Arguments:
+
 1. organizationId: ID! - It helps to identify a unique organization that needs to unblock user. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. userId: ID! - It helps to identify a unique user that needs to unblocked. The ! signifies that the value passed is non-nullable or NOT NULL.
 
@@ -2029,17 +2149,18 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  unblockUser(
-    organizationId: <o_id>
-    userId: <u_id>
-  ){
-    joinedOrganizations{
-      name
-    }
-  }
+unblockUser(
+organizationId: <o_id>
+userId: <u_id>
+){
+joinedOrganizations{
+name
+}
+}
 }
 
 # 38
+
 addUserImage(
 file: Upload!
 ): User!
@@ -2047,6 +2168,7 @@ file: Upload!
 Description: It adds an image to the user profile.
 
 Arguments:
+
 1. file: Upload! - It is the file that need to be uploaded. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: User!
@@ -2055,14 +2177,15 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  addUserImage(
-    file: <file_Upload>
-  ){
-    firsrtName
-  }
+addUserImage(
+file: <file_Upload>
+){
+firsrtName
+}
 }
 
 # 39
+
 removeUserImage: User!
 
 Description: It removes the profile image of the current user.
@@ -2076,13 +2199,14 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  removeUserImage{
-    _id
-    firstName
-  }
+removeUserImage{
+\_id
+firstName
+}
 }
 
 # 40
+
 addOrganizationImage(
 file: Upload!
 organizationId: String!
@@ -2091,6 +2215,7 @@ organizationId: String!
 Description: It adds image to the organization profile.
 
 Arguments:
+
 1. file: Upload! - It is the file that need to be uploaded. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. organizationId: String! - It helps to identify the organization where image needs to be added. The ! signifies that the value passed is non-nullable or NOT NULL.
 
@@ -2100,15 +2225,16 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  addOrganizationImage(
-    file:<file_Upload>
-    organizationId: "abc"
-  ){
-    image
-  }
+addOrganizationImage(
+file:<file_Upload>
+organizationId: "abc"
+){
+image
+}
 }
 
 # 41
+
 removeOrganizationImage(
 organizationId: String!
 ): Organization!
@@ -2116,6 +2242,7 @@ organizationId: String!
 Description: It removes the image from organization profile.
 
 Arguments:
+
 1. organizationId: String! - It helps to identify the organization from which image needs to be removed. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: Organization!
@@ -2124,14 +2251,15 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  removeOrganizationImage(
-    organizationId: "abc"
-  ){
-    image
-  }
+removeOrganizationImage(
+organizationId: "abc"
+){
+image
+}
 }
 
 # 42
+
 createDirectChat(
 data: createChatInput
 ): DirectChat!
@@ -2139,6 +2267,7 @@ data: createChatInput
 Description: It creates a direct chat between users.
 
 Arguments:
+
 1. data: createChatInput - It contains the necessary data for creating a chat.
 
 Returns: DirectChat!
@@ -2147,19 +2276,20 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  createDirectChat(
-    data:{
-      userIds: [<id_1>,<id_2>]
-      organizationId: <o_id>
-    }
-  ){
-    messages{
-      messageContent
-    }
-  }
+createDirectChat(
+data:{
+userIds: [<id_1>,<id_2>]
+organizationId: <o_id>
+}
+){
+messages{
+messageContent
+}
+}
 }
 
 # 43
+
 removeDirectChat(
 chatId: ID!
 organizationId: ID!
@@ -2168,8 +2298,9 @@ organizationId: ID!
 Description: It removes the direct chat between the users.
 
 Arguments:
+
 1. chatId: ID! - It helps to identify the chat which needs to be removed. The ! signifies that the value passed is non-nullable or NOT NULL.
-2. organizationId: ID! -  It helps to identify a unique organization from which direct chat needs to be removed. The ! signifies that the value passed is non-nullable or NOT NULL.
+2. organizationId: ID! - It helps to identify a unique organization from which direct chat needs to be removed. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: DirectChat!
 
@@ -2177,18 +2308,19 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  removeDirectChat(
-    chatId: <c_id>
-    organizationId: <o_id>
-  ){
-    _id
-    messages{
-      messageContent
-    }
-  }
+removeDirectChat(
+chatId: <c_id>
+organizationId: <o_id>
+){
+\_id
+messages{
+messageContent
+}
+}
 }
 
 # 44
+
 sendMessageToDirectChat(
 chatId: ID!
 messageContent: String!
@@ -2197,6 +2329,7 @@ messageContent: String!
 Description: It lets the user send a message to direct chat.
 
 Arguments:
+
 1. chatId: ID! - It helps to identify the chat where message needs to be sent. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. messageContent: String! - It contains the data/body of the message.
 
@@ -2206,22 +2339,23 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  sendMessageToDirectChat(
-    chatId: <c_id>
-    messageContent: "Hello"
-  ){
-    _id
-    sender{
-      firstName
-    }
-    receiver{
-      firstName
-    }
-    messageContent
-  }
+sendMessageToDirectChat(
+chatId: <c_id>
+messageContent: "Hello"
+){
+\_id
+sender{
+firstName
+}
+receiver{
+firstName
+}
+messageContent
+}
 }
 
 # 45
+
 createGroupChat(
 data: createGroupChatInput
 ): GroupChat!
@@ -2229,6 +2363,7 @@ data: createGroupChatInput
 Description: It creates a new group chat.
 
 Arguments:
+
 1. data: createGroupChatInput - It contains the necessary data to create a new group chat.
 
 Returns: GroupChat!
@@ -2237,21 +2372,22 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  createGroupChat(
-    data:{
-      userIds:[<id_1>,<id_2>,<id_3>]
-      organizationId: <o_id>>
-      title: "New Chat"
-    }
-  ){
-    _id
-    messages{
-      messageContent
-    }
-  }
+createGroupChat(
+data:{
+userIds:[<id_1>,<id_2>,<id_3>]
+organizationId: <o_id>>
+title: "New Chat"
+}
+){
+\_id
+messages{
+messageContent
+}
+}
 }
 
 # 46
+
 removeGroupChat(
 chatId: ID!
 ): GroupChat!
@@ -2259,6 +2395,7 @@ chatId: ID!
 Description: It removes the group chat.
 
 Arguments:
+
 1. chatId: ID! - It helps to identify the group chat which needs to be removed. The ! signifies that the value passed is non-nullable or NOT NULL.
 
 Returns: GroupChat!
@@ -2267,17 +2404,18 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  removeGroupChat(
-    chatId: <c_id>
-  ){
-    _id
-    creator{
-      firstName
-    }
-  }
+removeGroupChat(
+chatId: <c_id>
+){
+\_id
+creator{
+firstName
+}
+}
 }
 
 # 47
+
 sendMessageToGroupChat(
 chatId: ID!
 messageContent: String!
@@ -2286,6 +2424,7 @@ messageContent: String!
 Description: It lets the user send a message to the group chat.
 
 Arguments:
+
 1. chatId: ID! - It helps to identify the group chat where the user needs to send the message. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. messageContent: String! - It contains the data/body of the message to be sent on the group chat. The ! signifies that the value passed is non-nullable or NOT NULL.
 
@@ -2295,16 +2434,17 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  sendMessageToGroupChat(
-    chatId: <c_id>
-    messageContent: "Hey guys!!"
-  ){
-    _id
-    messageContent
-  }
+sendMessageToGroupChat(
+chatId: <c_id>
+messageContent: "Hey guys!!"
+){
+\_id
+messageContent
+}
 }
 
 # 48
+
 addUserToGroupChat(
 userId: ID!
 chatId: ID!
@@ -2313,6 +2453,7 @@ chatId: ID!
 Description: It adds a user to a group chat.
 
 Arguments:
+
 1. userId: ID! - It helps to identify the user who needs to be added on the group chat. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. chatId: ID! - It helps to identify the group chat where the user needs to be added. The ! signifies that the value passed is non-nullable or NOT NULL.
 
@@ -2322,18 +2463,19 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  addUserToGroupChat(
-    userId: <u_id>
-    chatId: <c_id>
-  ){
-    _id
-    users{
-      firstName
-    }
-  }
+addUserToGroupChat(
+userId: <u_id>
+chatId: <c_id>
+){
+\_id
+users{
+firstName
+}
+}
 }
 
 # 49
+
 removeUserFromGroupChat(
 userId: ID!
 chatId: ID!
@@ -2342,6 +2484,7 @@ chatId: ID!
 Description: It removes a user from the group chat.
 
 Arguments:
+
 1. userId: ID! - It helps to identify the user who needs to be removed from the group chat. The ! signifies that the value passed is non-nullable or NOT NULL.
 2. chatId: ID! - It helps to identify the group chat from which the user needs to be removed. The ! signifies that the value passed is non-nullable or NOT NULL.
 
@@ -2351,13 +2494,13 @@ The ! signifies that the object returned is non-nullable or NOT NULL.
 
 Example-
 mutation{
-  removeUserFromGroupChat(
-    userId: <u_id>
-    chatId: <c_id>
-  ){
-    _id
-    users{
-      firstName
-    }
-  }
+removeUserFromGroupChat(
+userId: <u_id>
+chatId: <c_id>
+){
+\_id
+users{
+firstName
+}
+}
 }

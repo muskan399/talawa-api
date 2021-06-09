@@ -11,7 +11,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           pr-message: "Congratulations on making your first PR! :confetti_ball: If you haven't already, check out our [Contributing Guidelines](https://github.com/PalisadoesFoundation/talawa/blob/master/CONTRIBUTING.md) and [PR Reporting Guidelines](https://github.com/PalisadoesFoundation/talawa/blob/master/PR-guidelines.md) to ensure that you are following our guidelines for contributing and creating PR."
   
-  prettier:
+  Code-Formatter:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout

@@ -86,8 +86,9 @@ jobs:
         node-version: '14'
     - run: npm install
     - run: npm run test --coverage
-    - if: always()
-      name: Report code coverage
+      continue-on-error: true
+#     - if: always()
+    - name: Report code coverage
       uses: VeryGoodOpenSource/very_good_coverage@v1.1.1
       with:
         path: "./coverage/lcov.info"
